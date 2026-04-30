@@ -4,7 +4,7 @@ import { BarChart3, ChevronRight, RotateCcw, Lightbulb, Info, Play, ShieldCheck,
 
 // 1. MATRIZ EBC (15 Preguntas)
 const QUESTIONS = [
-  { id: 1, cat: 'Dignidad', q: '¿Cuál es la brecha salarial máxima (sueldo más alto vs. más bajo)?', options: [{ t: 'Menos de 1:5', p: 10 }, { t: 'Entre 1:5 y 1:10', p: 5 }, { t: 'Más de 1:15', p: 0 }] },
+  { id: 1, cat: 'Dignidad', q: '¿Cuál es la brecha salarial máxima?', options: [{ t: 'Menos de 1:5', p: 10 }, { t: 'Entre 1:5 y 1:10', p: 5 }, { t: 'Más de 1:15', p: 0 }] },
   { id: 2, cat: 'Dignidad', q: '¿Se respeta el derecho a la desconexión digital?', options: [{ t: 'Sí, por política estricta', p: 10 }, { t: 'A veces hay excepciones', p: 5 }, { t: 'Disponibilidad 24/7', p: 0 }] },
   { id: 3, cat: 'Dignidad', q: '¿Existe flexibilidad horaria real y fomento del teletrabajo?', options: [{ t: 'Total (100% flexible)', p: 10 }, { t: 'Híbrido controlado', p: 5 }, { t: 'Presencialismo obligatorio', p: 0 }] },
   { id: 4, cat: 'Solidaridad', q: '¿Contribuye la empresa activamente a proyectos Open Source?', options: [{ t: 'Sí, con recursos y tiempo', p: 10 }, { t: 'Aportaciones puntuales', p: 5 }, { t: 'Sin contribuciones', p: 0 }] },
@@ -15,7 +15,7 @@ const QUESTIONS = [
   { id: 9, cat: 'Ecología', q: '¿La oficina aplica medidas de ahorro energético y reducción de residuos?', options: [{ t: 'Auditoría activa', p: 10 }, { t: 'Medidas básicas', p: 5 }, { t: 'Sin medidas', p: 0 }] },
   { id: 10, cat: 'Justicia', q: '¿Se auditan los algoritmos e IAs para evitar sesgos de género o raza?', options: [{ t: 'Auditoría ética periódica', p: 10 }, { t: 'Se revisa si hay errores', p: 5 }, { t: 'No se auditan', p: 0 }] },
   { id: 11, cat: 'Justicia', q: '¿Existe igualdad de oportunidades real en los puestos directivos?', options: [{ t: 'Paridad total (50/50)', p: 10 }, { t: 'Alguna mujer en directiva', p: 5 }, { t: 'Dirección monocolor', p: 0 }] },
-  { id: 12, cat: 'Justicia', q: '¿Se prohíben contratos con sectores poco éticos (armas, paraísos)?', options: [{ t: 'Sí, por código ético', p: 10 }, { t: 'Se evalúa caso a caso', p: 5 }, { t: 'Se prioriza el beneficio', p: 0 }] },
+  { id: 12, cat: 'Justicia', q: '¿Se prohíben contratos con sectores poco éticos', options: [{ t: 'Sí, por código ético', p: 10 }, { t: 'Se evalúa caso a caso', p: 5 }, { t: 'Se prioriza el beneficio', p: 0 }] },
   { id: 13, cat: 'Transparencia', q: '¿Hay transparencia sobre situación financiera y reparto de beneficios?', options: [{ t: 'Total transparencia', p: 10 }, { t: 'Información limitada', p: 5 }, { t: 'Opacidad total', p: 0 }] },
   { id: 14, cat: 'Transparencia', q: '¿Participan los empleados en decisiones estratégicas?', options: [{ t: 'Voto democrático/Asamblea', p: 10 }, { t: 'Consulta no vinculante', p: 5 }, { t: 'Solo decide gerencia', p: 0 }] },
   { id: 15, cat: 'Transparencia', q: '¿Cómo gestiona la empresa los datos de sus clientes y usuarios?', options: [{ t: 'Soberanía del dato proactiva', p: 10 }, { t: 'Mínimo legal (RGPD)', p: 5 }, { t: 'Monetización activa', p: 0 }] },
@@ -87,7 +87,6 @@ export default function App() {
               >
                 Comenzar Auditoría <Play className="fill-white w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <p className="text-center text-slate-400 text-sm mt-4 italic">Tiempo estimado: 4 minutos</p>
             </div>
           </div>
         </div>
@@ -147,7 +146,7 @@ export default function App() {
     );
   }
 
-  // PANTALLA DE CUESTIONARIO (CON OPCIONES ALEATORIZADAS)
+  // PANTALLA DE CUESTIONARIO
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
@@ -166,7 +165,6 @@ export default function App() {
             {QUESTIONS[step].q}
           </p>
           <div className="grid gap-4">
-            {/* Mezclamos el array de opciones usando el ID de la pregunta para que no cambie al hacer re-render */}
             {[...QUESTIONS[step].options].sort((a, b) => a.t.localeCompare(b.t)).map((opt, i) => (
               <button key={i} onClick={() => handleAnswer(opt.p)} className="flex items-center justify-between p-6 w-full bg-white border-2 border-slate-100 rounded-2xl hover:border-green-500 hover:bg-green-50 hover:scale-[1.02] transition-all group">
                 <span className="font-bold text-slate-600 group-hover:text-green-700 text-lg text-left">{opt.t}</span>
