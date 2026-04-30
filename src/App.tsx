@@ -173,9 +173,6 @@ export default function App() {
             ))}
           </div>
         </div>
-        <p className="text-center text-slate-400 text-sm flex items-center justify-center gap-2 font-medium">
-          <Info size={16} /> Tu progreso se guarda automáticamente en este dispositivo.
-        </p>
       </div>
     </div>
   );
